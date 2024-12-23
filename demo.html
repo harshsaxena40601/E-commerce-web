@@ -1,0 +1,266 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox Layout</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: row; /* Arrange children in a row */
+      }
+      .vertical {
+        display: flex;
+        flex-direction: column; /* Arrange children in a column */
+        margin-right: 20px; /* Space between vertical and horizontal divs */
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        border: 1px solid #000;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="vertical">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+      <div class="horizontal">
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+      </div>
+    </div>
+  </body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Layout</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        grid-template-rows: repeat(3, 1fr); /* Three rows */
+        gap: 20px; /* Space between grid items */
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* Positioning the boxes */
+      .box1 {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .box2 {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      .box3 {
+        grid-column: 1;
+        grid-row: 3;
+      }
+      .box4 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      .box5 {
+        grid-column: 2;
+        grid-row: 2;
+      }
+      .box6 {
+        grid-column: 2;
+        grid-row: 3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box box1">1</div>
+      <div class="box box2">2</div>
+      <div class="box box3">3</div>
+      <div class="box box4">4</div>
+      <div class="box box5">5</div>
+      <div class="box box6">6</div>
+    </div>
+  </body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertical and Horizontal Layout</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: row; /* Arrange children in a row */
+      }
+      .vertical {
+        display: flex;
+        flex-direction: column; /* Arrange children in a column */
+        margin-right: 20px; /* Space between vertical and horizontal divs */
+      }
+      .horizontal {
+        display: flex;
+        align-items: center; /* Center items vertically */
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+      }
+      .image-container {
+        display: flex;
+        align-items: center; /* Center the image vertically */
+      }
+      .image {
+        width: 200px; /* Set the width of the image */
+        height: auto; /* Maintain aspect ratio */
+        margin: 0 10px; /* Space between image and buttons */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="vertical">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+      <div class="horizontal">
+        <button class="box">Button 4</button>
+        <div class="image-container">
+          <img
+            src="https://via.placeholder.com/200"
+            alt="Placeholder"
+            class="image"
+          />
+        </div>
+        <button class="box">Button 5</button>
+      </div>
+    </div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertical and Horizontal Layout</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+        margin: 0;
+        padding: 20px; /* Add some padding for smaller screens */
+        box-sizing: border-box; /* Include padding in width/height calculations */
+      }
+      .container {
+        display: flex;
+        flex-direction: row; /* Arrange children in a row */
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        justify-content: center; /* Center the content */
+      }
+      .vertical {
+        display: flex;
+        flex-direction: column; /* Arrange children in a column */
+        margin-right: 20px; /* Space between vertical and horizontal divs */
+      }
+      .horizontal {
+        display: flex;
+        align-items: center; /* Center items vertically */
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+      }
+      .image-container {
+        display: flex;
+        align-items: center; /* Center the image vertically */
+      }
+      .image {
+        width: 200px; /* Set the width of the image */
+        height: auto; /* Maintain aspect ratio */
+        margin: 0 10px; /* Space between image and buttons */
+      }
+
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column; /* Stack vertically on smaller screens */
+          align-items: center; /* Center items */
+        }
+        .vertical {
+          margin-right: 0; /* Remove right margin */
+          margin-bottom: 20px; /* Add bottom margin for spacing */
+        }
+        .horizontal {
+          flex-direction: column; /* Stack buttons and image vertically */
+          align-items: center; /* Center items */
+        }
+        .image {
+          width: 100%; /* Make image responsive */
+          max-width: 200px; /* Limit max width */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="vertical">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+      <div class="horizontal">
+        <button class="box">Button 4</button>
+        <div class="image-container">
+          <img
+            src="https://via.placeholder.com/200"
+            alt="Placeholder"
+            class="image"
+          />
+        </div>
+        <button class="box">Button 5</button>
+      </div>
+    </div>
+  </body>
+</html>
