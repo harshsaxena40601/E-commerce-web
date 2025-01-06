@@ -1,7 +1,7 @@
 body {
   font-family: monospace;
   overflow-x: hidden;
-  font-size: 15px;
+  font-synthesis: 15px;
 }
 a {
   text-decoration: none;
@@ -13,12 +13,12 @@ a {
   transition: transform 1s;
 }
 header img {
-  width: 50px;
+  width: 60px;
 }
 header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 header .iconCart {
   position: relative;
@@ -29,16 +29,16 @@ header .totalQuantity {
   top: 0;
   right: 0;
   font-size: x-large;
-  background-color: red;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+  background-color: #b31010;
+  width: 30px;
+  height: 30px;
   color: #fff;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateX(10px);
+  border-radius: 50%;
+  transform: translateX(20px);
 }
 .listProduct {
   display: grid;
@@ -47,11 +47,10 @@ header .totalQuantity {
 }
 .listProduct .item img {
   width: 100%;
+  height: 430px;
+  object-fit: cover;
 }
 .listProduct .item {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
   position: relative;
 }
 .listProduct .item h2 {
@@ -59,12 +58,9 @@ header .totalQuantity {
   font-size: x-large;
 }
 .listProduct .item .price {
-  font-size: large;
-  font-weight: bold;
+  font-size: x-large;
 }
-.listProduct .item {
-  position: relative;
-}
+
 .listProduct .item button {
   position: absolute;
   top: 50%;
@@ -76,32 +72,40 @@ header .totalQuantity {
   padding: 20px 30px;
   box-shadow: 0 10px 50px #000;
   cursor: pointer;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%) translateY(100px);
   opacity: 0;
 }
 .listProduct .item:hover button {
-  opacity: 1;
   transition: 0.5s;
-  transform: translateX(-50%);
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 .cart {
   color: #fff;
   position: fixed;
-  top: 0;
-  right: -100%;
   width: 400px;
+  max-width: 80vw;
   height: 100vh;
   background-color: #0e0f11;
+  top: 0px;
+  right: -100%;
   display: grid;
   grid-template-rows: 50px 1fr 50px;
   gap: 20px;
   transition: right 1s;
 }
+
+.cart .buttons .checkout {
+  background-color: #e8bc0e;
+  color: #000;
+}
 .cart h2 {
   color: #e8bc0e;
   padding: 20px;
+  height: 30px;
   margin: 0;
 }
+
 .cart .listCart .item {
   display: grid;
   grid-template-columns: 50px 1fr 70px;
@@ -123,11 +127,12 @@ header .totalQuantity {
   justify-content: end;
   align-items: center;
 }
-.cart .listCart .item span {
+.cart .listCart .item .quantity span {
   display: block;
   width: 50px;
   text-align: center;
 }
+
 .cart .listCart {
   padding: 20px;
   overflow: auto;
@@ -135,6 +140,7 @@ header .totalQuantity {
 .cart .listCart::-webkit-scrollbar {
   width: 0;
 }
+
 .cart .buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -150,7 +156,82 @@ header .totalQuantity {
 }
 .cart .buttons a {
   color: #fff;
+  text-decoration: none;
 }
-.cart .buttons .checkout {
-  background-color: #e6572c;
+.checkoutLayout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+  padding: 20px;
+}
+.checkoutLayout .right {
+  background-color: #5358b3;
+  border-radius: 20px;
+  padding: 40px;
+  color: #fff;
+}
+.checkoutLayout .right .form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  border-bottom: 1px solid #7a7fe2;
+  padding-bottom: 20px;
+}
+.checkoutLayout .form h1,
+.checkoutLayout .form .group:nth-child(-n + 3) {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.checkoutLayout .form input,
+.checkoutLayout .form select {
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  margin-top: 10px;
+  border: none;
+  background-color: #6a6fc9;
+  color: #fff;
+}
+.checkoutLayout .right .return .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.checkoutLayout .right .return .row div:nth-child(2) {
+  font-weight: bold;
+  font-size: x-large;
+}
+.buttonCheckout {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background-color: #49d8b9;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+.returnCart h1 {
+  border-top: 1px solid #eee;
+  padding: 20px 0;
+}
+.returnCart .list .item img {
+  height: 80px;
+}
+.returnCart .list .item {
+  display: grid;
+  grid-template-columns: 80px 1fr 50px 80px;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 0 10px;
+  box-shadow: 0 10px 20px #5555;
+  border-radius: 20px;
+}
+.returnCart .list .item .name,
+.returnCart .list .item .returnPrice {
+  font-size: large;
+  font-weight: bold;
 }
