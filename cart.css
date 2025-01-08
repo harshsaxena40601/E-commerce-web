@@ -24,14 +24,19 @@ header .iconCart {
   position: relative;
   z-index: 1;
 }
+.iconCart button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
 header .totalQuantity {
   position: absolute;
   top: 0;
   right: 0;
   font-size: x-large;
-  background-color: #b31010;
-  width: 30px;
-  height: 30px;
+  background-color: #eb1111;
+  width: 40px;
+  height: 40px;
   color: #fff;
   font-weight: bold;
   display: flex;
@@ -39,6 +44,7 @@ header .totalQuantity {
   align-items: center;
   border-radius: 50%;
   transform: translateX(20px);
+  cursor: pointer;
 }
 .listProduct {
   display: grid;

@@ -1,17 +1,22 @@
 let iconCart = document.querySelector(".iconCart");
+let cartButton = document.querySelector("#cartButton"); // Select the button with ID cartButton
 let cart = document.querySelector(".cart");
 let container = document.querySelector(".container");
 let close = document.querySelector(".close");
 
-iconCart.addEventListener("click", function () {
-  if (cart.style.right == "-100%") {
+function toggleCart() {
+  console.log("Toggling cart");
+  if (cart.style.right == "-100%" || cart.style.right === "") {
     cart.style.right = "0";
     container.style.transform = "translateX(-400px)";
   } else {
     cart.style.right = "-100%";
     container.style.transform = "translateX(0)";
   }
-});
+}
+
+iconCart.addEventListener("click", toggleCart);
+cartButton.addEventListener("click", toggleCart); // Add event listener to cartButton
 close.addEventListener("click", function () {
   cart.style.right = "-100%";
   container.style.transform = "translateX(0)";
