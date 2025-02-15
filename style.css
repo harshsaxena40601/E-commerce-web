@@ -311,6 +311,29 @@ input:checked ~ .slide {
 
   margin: 0 10px;
 }
+.image-container {
+  height: 500px;
+  width: 100%;
+  background-image: url("IMG-20241205-WA0017.jpg");
+  background-position: center;
+  background-size: 100%;
+  animation-name: myani;
+  animation-duration: 12s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes myani {
+  0% {
+    background-image: url("IMG-20241205-WA0017.jpg");
+  }
+  35% {
+    background-image: url("IMG-20241205-WA0018.jpg");
+  }
+  75% {
+    background-image: url("IMG-20241205-WA0019.jpg");
+  }
+}
+
 a {
   text-decoration: none;
   color: #ffffff;
