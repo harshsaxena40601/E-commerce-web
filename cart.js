@@ -1,11 +1,11 @@
 let iconCart = document.querySelector(".iconCart");
-let cartButton = document.querySelector("#cartButton"); // Select the button with ID cartButton
+let cartButton = document.querySelector("#cartButton");
 let cart = document.querySelector(".cart");
 let container = document.querySelector(".container");
 let close = document.querySelector(".close");
 
+// Function to toggle the cart view
 function toggleCart() {
-  console.log("Toggling cart");
   if (cart.style.right == "-100%" || cart.style.right === "") {
     cart.style.right = "0";
     container.style.transform = "translateX(-400px)";
@@ -16,129 +16,106 @@ function toggleCart() {
 }
 
 iconCart.addEventListener("click", toggleCart);
-cartButton.addEventListener("click", toggleCart); // Add event listener to cartButton
+cartButton.addEventListener("click", toggleCart);
 close.addEventListener("click", function () {
   cart.style.right = "-100%";
   container.style.transform = "translateX(0)";
 });
 
 let products = null;
-// get data from file json
-fetch("product.json")
+
+// ✅ Fetch products from the backend API
+fetch("http://localhost:5000/products")
   .then((response) => response.json())
   .then((data) => {
     products = data;
     addDataToHTML();
-  });
+  })
+  .catch((error) => console.error("Error fetching products:", error));
 
-//show datas product in list
+// ✅ Display products in the HTML
 function addDataToHTML() {
-  // remove datas default from HTML
   let listProductHTML = document.querySelector(".listProduct");
   listProductHTML.innerHTML = "";
 
-  // add new datas
-  if (products != null) {
-    // if has data
+  if (products) {
     products.forEach((product) => {
       let newProduct = document.createElement("div");
       newProduct.classList.add("item");
-      newProduct.innerHTML = `<img src="${product.image}" alt="">
+      newProduct.innerHTML = `
+            <img src="${product.image}" alt="">
             <h2>${product.name}</h2>
             <div class="price">$${product.price}</div>
-            <button onclick="addCart(${product.id})">Add To Cart</button>`;
+            <button onclick="addCart('${product._id}')">Add To Cart</button>`;
 
       listProductHTML.appendChild(newProduct);
     });
   }
 }
-//use cookie so the cart doesn't get lost on refresh page
 
-let listCart = [];
-function checkCart() {
-  var cookieValue = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("listCart="));
-  if (cookieValue) {
-    listCart = JSON.parse(cookieValue.split("=")[1]);
-  } else {
-    listCart = [];
+// ✅ Use localStorage instead of cookies for the cart
+let listCart = JSON.parse(localStorage.getItem("listCart")) || {};
+
+// ✅ Add product to cart
+function addCart(productId) {
+  let product = products.find((p) => p._id === productId);
+
+  if (product) {
+    if (!listCart[productId]) {
+      listCart[productId] = { ...product, quantity: 1 };
+    } else {
+      listCart[productId].quantity++;
+    }
+
+    localStorage.setItem("listCart", JSON.stringify(listCart)); // ✅ Save cart data
+    addCartToHTML();
   }
 }
-checkCart();
-function addCart($idProduct) {
-  let productsCopy = JSON.parse(JSON.stringify(products));
-  //// If this product is not in the cart
-  if (!listCart[$idProduct]) {
-    listCart[$idProduct] = productsCopy.filter(
-      (product) => product.id == $idProduct
-    )[0];
-    listCart[$idProduct].quantity = 1;
-  } else {
-    //If this product is already in the cart.
-    //I just increased the quantity
-    listCart[$idProduct].quantity++;
-  }
-  document.cookie =
-    "listCart=" +
-    JSON.stringify(listCart) +
-    "; expires=Thu, 31 Dec 2025 23:59:59 UTC; path=/;";
 
-  addCartToHTML();
-}
 addCartToHTML();
+
+// ✅ Display cart data
 function addCartToHTML() {
-  // clear data default
   let listCartHTML = document.querySelector(".listCart");
   listCartHTML.innerHTML = "";
 
   let totalHTML = document.querySelector(".totalQuantity");
   let totalQuantity = 0;
-  // if has product in Cart
-  if (listCart) {
-    listCart.forEach((product) => {
-      if (product) {
-        let newCart = document.createElement("div");
-        newCart.classList.add("item");
-        newCart.innerHTML = `<img src="${product.image}">
-                    <div class="content">
-                        <div class="name">${product.name}</div>
-                        <div class="price">$${product.price} / 1 product</div>
-                    </div>
-                    <div class="quantity">
-                        <button onclick="changeQuantity(${product.id}, '-')">-</button>
-                        <span class="value">${product.quantity}</span>
-                        <button onclick="changeQuantity(${product.id}, '+')">+</button>
-                    </div>`;
-        listCartHTML.appendChild(newCart);
-        totalQuantity = totalQuantity + product.quantity;
-      }
-    });
-  }
+
+  Object.values(listCart).forEach((product) => {
+    let newCart = document.createElement("div");
+    newCart.classList.add("item");
+    newCart.innerHTML = `
+        <img src="${product.image}">
+        <div class="content">
+            <div class="name">${product.name}</div>
+            <div class="price">$${product.price} / 1 product</div>
+        </div>
+        <div class="quantity">
+            <button onclick="changeQuantity('${product._id}', '-')">-</button>
+            <span class="value">${product.quantity}</span>
+            <button onclick="changeQuantity('${product._id}', '+')">+</button>
+        </div>`;
+    listCartHTML.appendChild(newCart);
+    totalQuantity += product.quantity;
+  });
+
   totalHTML.innerText = totalQuantity;
 }
-function changeQuantity($idProduct, $type) {
-  switch ($type) {
-    case "+":
-      listCart[$idProduct].quantity++;
-      break;
-    case "-":
-      listCart[$idProduct].quantity--;
 
-      // if quantity <= 0 then remove product in cart
-      if (listCart[$idProduct].quantity <= 0) {
-        delete listCart[$idProduct];
+// ✅ Change product quantity in cart
+function changeQuantity(productId, type) {
+  if (listCart[productId]) {
+    if (type === "+") {
+      listCart[productId].quantity++;
+    } else if (type === "-") {
+      listCart[productId].quantity--;
+      if (listCart[productId].quantity <= 0) {
+        delete listCart[productId];
       }
-      break;
+    }
 
-    default:
-      break;
+    localStorage.setItem("listCart", JSON.stringify(listCart)); // ✅ Save updated cart
+    addCartToHTML();
   }
-  // save new data in cookie
-  document.cookie =
-    "listCart=" +
-    JSON.stringify(listCart) +
-    "; expires=Thu, 31 Dec 2025 23:59:59 UTC; path=/;";
-  // reload html view cart
-  addCartToHTML();
 }
