@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Cart = require("../models/Cart"); // Import the Cart model
+const Cart = require("./cartModel"); // Import the Cart model
 
 // ✅ Get cart for a user
 router.get("/cart/:userId", async (req, res) => {

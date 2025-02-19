@@ -91,9 +91,9 @@ function verifyToken(req, res, next) {
 }
 
 // ✅ Import & Use Cart Routes
-const cartRoutes = require("./routes/cart"); // Import cart route
+const cartRoutes = require("./cartRoutes"); // Import cart route
 app.use("/api", cartRoutes); // Use cart routes
 
 // ✅ Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
